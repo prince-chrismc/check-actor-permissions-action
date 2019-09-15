@@ -1,11 +1,13 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: Repo Permission Check Action
+description: Check if a user has specific access to this repo
+author: "Benjamin Lanon <benjamin@lannonbr.com>"
 inputs:
-  milliseconds: # change this
+  permission:
+    description: the max permission level required
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: "node12"
+  main: "lib/main.js"
+branding:
+  icon: "check"
+  color: "green"
