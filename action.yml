@@ -5,6 +5,9 @@ outputs:
   permitted:
     description: "'true' or 'false' depending on actor permission meeting the requirement"
 inputs:
+  github_token:
+    description: A GitHub token.
+    required: true
   permission:
     description: the minimum permission level required
     required: true
