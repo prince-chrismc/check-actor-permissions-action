@@ -26,12 +26,10 @@ const username = github.context.actor;
   // If the index of your permission is at least or greater than the required,
   // exit successfully.
   if (yourPermIdx < requiredPermIdx) {
-    const setFailed = core.getInput("fail") === "true"; // Do we set the action in error?
-    const notify = setFailed ? core.setFailed : core.warn;
-    notify(`🚨 Insuffient Permissions! ${username} does not have ${argPerm} permissions`);
+    core.setFailed(`🚨 Insuffient Permissions! ${username} does not have ${argPerm} permissions`);
     core.setOutput('permitted', 'false');
     return;
   }
   core.info(`✔️ ${username} is permitted`)
   core.setOutput('permitted', 'true');
-})();
+})().catch(e => core.setFailed(e));
