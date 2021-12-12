@@ -11,10 +11,6 @@ inputs:
   permission:
     description: the minimum permission level required
     required: true
-  fail:
-    description: fail the job if the minimum permission level it not meet
-    required: false
-    default: "true"
 runs:
   using: "node12"
   main: "lib/index.js"
