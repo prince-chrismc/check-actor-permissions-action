@@ -13,3 +13,9 @@ v2.0.0 - Sept 15, 2019
 v1.2.0 - Feb 28, 2019
 
 - Added: Updated Actions-toolkit to v1.5.0 (PR by @macklinu)
+
+v3.0.0
+
+- Added: Output variable `permitted` (PR by @prince-chrismc)
+- Break: Move `token` from `env` to inputs
+- Chore: Update dependencies
