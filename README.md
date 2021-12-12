@@ -12,15 +12,15 @@ If you are new, there's also a simpler introduction.  See the [Hello World JavaS
 
 ## Getting Started
 
-To have an action to only pass if a user has write access to the repo, I can use the action as follows:
+To have an action to only pass if a user has write access to the repo, use the action as follows:
 
 ```yaml
 steps:
-  - name: "Check if user has write access"
+  - name: Check if user has write access
     uses: lannonbr/repo-permission-check-action@v2
     with:
       github_token: ${{ secrets.GITHUB_TOKEN }}
-      permission: "write"
+      permission: write
 ```
 
 ### Conditionally Continue
@@ -28,11 +28,11 @@ steps:
 ```yaml
 steps:
   - id: check
+    continue-on-error: true
     uses: lannonbr/repo-permission-check-action@v3
     with:
       github_token: ${{ secrets.GITHUB_TOKEN }}
-      permission: "write"
-      fail: "false"
+      permission: write
   - if: steps.check.outputs.permitted == 'true'
     uses: actions/checkout@v2
     with:
