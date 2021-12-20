@@ -1,14 +1,15 @@
-<p align="center">
-  <a href="https://github.com/actions/typescript-action/actions"><img alt="typescript-action status" src="https://github.com/actions/typescript-action/workflows/build-test/badge.svg"></a>
-</p>
+# Check Actor Permissions Actopns
 
-# Create a JavaScript Action using TypeScript
+GitHub Action to check if an actor has a specific access to the repository.
 
-Use this template to bootstrap the creation of a TypeScript action.:rocket:
+Users have one of four permission levels for any repo:
 
-This template includes compilation support, tests, a validation workflow, publishing, and versioning guidance.  
+- **none**: no access to a repo
+- **read**: pull-only access to a repo
+- **write**: pull and push access to a repo
+- **admin**: pull, push, and administrator access to a repo.
 
-If you are new, there's also a simpler introduction.  See the [Hello World JavaScript Action](https://github.com/actions/hello-world-javascript-action)
+This action will check on the current repo if the user has a high enough permission level based on a defined argument.
 
 ## Getting Started
 
