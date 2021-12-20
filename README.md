@@ -2,23 +2,23 @@
 
 GitHub Action to check if an actor has a specific access to the repository.
 
-Users have one of four permission levels for any repo:
+Users may one of [four permission levels](https://docs.github.com/en/rest/reference/collaborators#get-repository-permissions-for-a-user) for any repository:
 
-- **none**: no access to a repo
-- **read**: pull-only access to a repo
-- **write**: pull and push access to a repo
-- **admin**: pull, push, and administrator access to a repo.
+- **none**: no access
+- **read**: pull-only access
+- **write**: pull and push access
+- **admin**: pull, push, and administrator access
 
-This action will check on the current repo if the user has a high enough permission level based on a defined argument.
+This action will check on the current repository if the actor has a high enough permission level based on the provided argument.
 
 ## Getting Started
 
-To have an action to only pass if a user has write access to the repo, use the action as follows:
+To have an action that only passes if the actor has write access to the repo, use the action as follows:
 
 ```yaml
 steps:
   - name: Check if user has write access
-    uses: lannonbr/repo-permission-check-action@v2
+    uses: prince-chrismc/check-actor-permissions-action@v1
     with:
       github_token: ${{ secrets.GITHUB_TOKEN }}
       permission: write
@@ -26,11 +26,13 @@ steps:
 
 ### Conditionally Continue
 
+To have the workflow change behavoirs depending on the actors permissions, use the action as follows:
+
 ```yaml
 steps:
   - id: check
     continue-on-error: true
-    uses: lannonbr/repo-permission-check-action@v3
+    uses: prince-chrismc/check-actor-permissions-action@v1
     with:
       github_token: ${{ secrets.GITHUB_TOKEN }}
       permission: write
