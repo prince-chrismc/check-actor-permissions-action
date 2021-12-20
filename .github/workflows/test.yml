@@ -6,11 +6,15 @@ on:
   workflow_dispatch: {}
 
 jobs:
-  build: # make sure build/ci work properly
+  ci:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npm install
+      - uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+      - run: npm i
       - run: npm run all
 
   e2e: # make sure the action works on a clean machine without building
@@ -21,3 +25,18 @@ jobs:
         with:
           permission: write
           github_token: ${{ secrets.GITHUB_TOKEN }}
+
+  coverage:
+    needs: ci
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+      - run: npm i
+      - run: npm run test -- --coverage
+      - uses: codecov/codecov-action@v2
+        with:
+          directory: coverage/
