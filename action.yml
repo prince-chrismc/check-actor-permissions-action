@@ -1,6 +1,9 @@
 name: Repo Permission Check Action
 description: Check if a user has specific access to this repo
 author: "Benjamin Lanon <benjamin@lannonbr.com>"
+branding:
+  icon: "check"
+  color: "green"
 outputs:
   permitted:
     description: "'true' or 'false' depending on actor permission meeting the requirement"
@@ -13,7 +16,4 @@ inputs:
     required: true
 runs:
   using: "node12"
-  main: "lib/index.js"
-branding:
-  icon: "check"
-  color: "green"
+  main: "dist/index.js"
