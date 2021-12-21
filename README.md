@@ -1,4 +1,4 @@
-# Check Actor Permissions Actopns
+# Check Actor Permissions Action
 
 GitHub Action to check if an actor has a specific access to the repository.
 
