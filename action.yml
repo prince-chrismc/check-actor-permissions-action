@@ -1,18 +1,18 @@
-name: Repo Permission Check Action
-description: Check if a user has specific access to this repo
-author: "Benjamin Lanon <benjamin@lannonbr.com>"
+name: Check Actor Permissions
+description: Check if an actor has a specific access to the repository
+author: "prince-chrismc"
 branding:
   icon: "check"
   color: "green"
 outputs:
   permitted:
-    description: "'true' or 'false' depending on actor permission meeting the requirement"
+    description: "Set 'true' or 'false' depending on actor permission meeting the requirement"
 inputs:
   github_token:
     description: A GitHub token.
     required: true
   permission:
-    description: the minimum permission level required
+    description: The minimum permission level required
     required: true
 runs:
   using: "node12"
