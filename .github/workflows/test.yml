@@ -24,7 +24,6 @@ jobs:
       - uses: ./
         with:
           permission: none
-          github_token: ${{ secrets.GITHUB_TOKEN }}
 
   coverage:
     needs: ci

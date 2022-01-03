@@ -25,7 +25,6 @@ steps:
   - name: Enforce permission requirement
     uses: prince-chrismc/check-actor-permissions-action@v1
     with:
-      github_token: ${{ secrets.GITHUB_TOKEN }}
       permission: write
 ```
 
@@ -39,7 +38,7 @@ steps:
     continue-on-error: true
     uses: prince-chrismc/check-actor-permissions-action@v1
     with:
-      github_token: ${{ secrets.GITHUB_TOKEN }}
+      github_token: ${{ github.token }}
       permission: write
   - if: steps.check.outputs.permitted == 'true'
     uses: actions/checkout@v2

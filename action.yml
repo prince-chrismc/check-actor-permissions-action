@@ -10,7 +10,8 @@ outputs:
 inputs:
   github_token:
     description: A GitHub token.
-    required: true
+    required: false
+    default: ${{ github.token }}
   permission:
     description: The minimum permission level required
     required: true
