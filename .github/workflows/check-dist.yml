@@ -39,7 +39,7 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         # If index.js was different than expected, upload the expected version as an artifact
-        if: ${{ failure() && steps.diff.conclusion == 'failure' }}
+        if: failure() && steps.diff.conclusion == 'failure'
         with:
           name: dist
           path: dist/
