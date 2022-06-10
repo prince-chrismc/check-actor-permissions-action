@@ -1,0 +1,13 @@
+name: Update Major Tag
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  tag-major:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Actions-R-Us/actions-tagger@v2
+        with:
+          token: ${{ github.token }}
