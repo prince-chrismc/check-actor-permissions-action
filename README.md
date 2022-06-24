@@ -5,16 +5,16 @@
 
 ## Purpose
 
-A GitHub Action to check if the current [actor](https://docs.github.com/en/graphql/reference/interfaces#actor) has a specific access to the repository.
+A GitHub Action to check if the current [actor](https://docs.github.com/en/graphql/reference/interfaces#actor) has sufficient access to the repository.
 
-Actors may one of [four permission levels](https://docs.github.com/en/rest/reference/collaborators#get-repository-permissions-for-a-user) for any repository:
+Actors may have one of [four permission levels](https://docs.github.com/en/rest/collaborators/collaborators#get-repository-permissions-for-a-user) for any repository:
 
 - **none**: no access
 - **read**: pull-only access
 - **write**: pull and push access
 - **admin**: pull, push, and administrator access
 
-This action will check against the current repository if the actor has a high enough permission level based on the provided argument.
+This action will check the current repository to see if the actor has a high enough permission level based on the provided argument.
 
 ## Getting Started
 
@@ -43,5 +43,5 @@ steps:
   - if: steps.check.outputs.permitted == 'true'
     uses: actions/checkout@v3
     with:
-      token: ${{ secrets.PERSONAL_ACCESS_TOKEN }} # Typically this would fail on public forks as secret at not available
+      token: ${{ secrets.PERSONAL_ACCESS_TOKEN }} # Typically this would fail on public forks as secret are not available
 ```
