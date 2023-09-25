@@ -1,0 +1,17 @@
+{
+  "plugins": ["jest"],
+  "extends": ["plugin:jest/recommended", "plugin:jest/style"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2023,
+    "sourceType": "module",
+    "project": "./__tests__/tsconfig.json"
+  },
+  "rules": {
+    "camelcase": "off", // JSON fields from GitHub API
+    "@typescript-eslint/no-explicit-any": "warn"
+  },
+  "env": {
+    "jest/globals": true
+  }
+}

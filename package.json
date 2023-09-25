@@ -1,6 +1,6 @@
 {
   "name": "check-actor-permissions-action",
-  "version": "0.0.0",
+  "version": "3.0.0",
   "private": true,
   "description": "GitHub Action to check if an actor has a specific access to the repository",
   "main": "lib/main.js",
@@ -8,7 +8,7 @@
     "build": "tsc",
     "format": "prettier --write '**/*.ts'",
     "format-check": "prettier --check '**/*.ts'",
-    "lint": "eslint --fix src/**/*.ts",
+    "lint": "eslint --fix src/**/*.ts && eslint --fix __tests__/**/*.ts",
     "package": "ncc build --source-map --license licenses.txt",
     "test": "jest",
     "all": "npm run build && npm run format && npm run lint && npm run package && npm test"

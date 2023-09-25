@@ -29,41 +29,30 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
 const permitted_1 = __nccwpck_require__(3456);
-function run() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const githubToken = core.getInput('github_token');
-            const octokit = github.getOctokit(githubToken);
-            const username = github.context.actor;
-            const requiredPermission = core.getInput('permission', { required: true }); // Permission level passed in through args
-            const allowed = yield (0, permitted_1.permitted)(octokit, github.context, requiredPermission);
-            if (allowed) {
-                core.info(`✔️ ${username} is permitted`);
-                core.setOutput('permitted', 'true');
-            }
-            else {
-                core.setFailed(`🚨 Insuffient Permissions! ${username} does not have ${requiredPermission} permissions`);
-                core.setOutput('permitted', 'false');
-            }
+async function run() {
+    try {
+        const githubToken = core.getInput('github_token');
+        const octokit = github.getOctokit(githubToken);
+        const username = github.context.actor;
+        const requiredPermission = core.getInput('permission', { required: true }); // Permission level passed in through args
+        const allowed = await (0, permitted_1.permitted)(octokit, github.context, requiredPermission);
+        if (allowed) {
+            core.info(`✔️ ${username} is permitted`);
+            core.setOutput('permitted', 'true');
         }
-        catch (error) {
-            if (error instanceof Error)
-                core.setFailed(error);
+        else {
+            core.setFailed(`🚨 Insufficient Permissions! ${username} does not have ${requiredPermission} permissions`);
+            core.setOutput('permitted', 'false');
         }
-    });
+    }
+    catch (error) {
+        if (error instanceof Error)
+            core.setFailed(error);
+    }
 }
 run();
 
@@ -98,32 +87,24 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.permitted = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 // Permission levels - higher in the array have higher access to the repo.
 const perms = ['none', 'read', 'write', 'admin'];
-function permitted(octokit, context, requiredPermission) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const response = yield octokit.rest.repos.getCollaboratorPermissionLevel(Object.assign(Object.assign({}, context.repo), { username: context.actor }));
-        const permission = response.data.permission; // Permission level of actual actor
-        const yourPermIdx = perms.indexOf(permission);
-        const requiredPermIdx = perms.indexOf(requiredPermission);
-        core.debug(`Actor Permission: ${permission}`);
-        core.debug(`Required Permission: ${requiredPermission}`);
-        // If the index of the current actor's permission is at least or greater than the required,
-        // exit successfully.
-        return yourPermIdx >= requiredPermIdx;
+async function permitted(octokit, context, requiredPermission) {
+    const response = await octokit.rest.repos.getCollaboratorPermissionLevel({
+        ...context.repo,
+        username: context.actor
     });
+    const permission = response.data.permission; // Permission level of actual actor
+    const yourPermIdx = perms.indexOf(permission);
+    const requiredPermIdx = perms.indexOf(requiredPermission);
+    core.debug(`Actor Permission: ${permission}`);
+    core.debug(`Required Permission: ${requiredPermission}`);
+    // If the index of the current actor's permission is at least or greater than the required,
+    // exit successfully.
+    return yourPermIdx >= requiredPermIdx;
 }
 exports.permitted = permitted;
 
