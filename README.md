@@ -23,7 +23,7 @@ To have an action that only passes if the actor has write access to the repo, us
 ```yaml
 steps:
   - name: Enforce permission requirement
-    uses: prince-chrismc/check-actor-permissions-action@v2
+    uses: prince-chrismc/check-actor-permissions-action@v3
     with:
       permission: write
 ```
@@ -36,7 +36,7 @@ To have the workflow change behaviors depending on the actor's permissions, use 
 steps:
   - id: check
     continue-on-error: true
-    uses: prince-chrismc/check-actor-permissions-action@v2
+    uses: prince-chrismc/check-actor-permissions-action@v3
     with:
       github_token: ${{ github.token }}
       permission: write
