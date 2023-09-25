@@ -1,5 +1,5 @@
 import * as core from '@actions/core'
-import * as github from '@actions/github'
+import {context, getOctokit} from '@actions/github'
 import nock from 'nock'
 
 import {permitted} from '../src/permitted'
@@ -17,7 +17,7 @@ import {
 let inputs = {} as any
 
 // Shallow clone original @actions/github context
-let originalContext = {...github.context}
+const originalContext = {...context}
 
 describe('queries', () => {
   beforeAll(() => {
@@ -36,31 +36,31 @@ describe('queries', () => {
     jest.spyOn(core, 'setFailed').mockImplementation(jest.fn())
 
     // Mock github context
-    jest.spyOn(github.context, 'repo', 'get').mockImplementation(() => {
+    jest.spyOn(context, 'repo', 'get').mockImplementation(() => {
       return {
         owner: 'some-owner',
         repo: 'some-repo'
       }
     })
-    github.context.ref = 'refs/heads/some-ref'
-    github.context.sha = '1234567890123456789012345678901234567890'
-    github.context.eventName = 'push'
-    github.context.actor = 'buster'
+    context.ref = 'refs/heads/some-ref'
+    context.sha = '1234567890123456789012345678901234567890'
+    context.eventName = 'push'
+    context.actor = 'buster'
   })
 
   beforeEach(() => {
     // Reset inputs
     inputs = {}
-    github.context.eventName = originalContext.eventName
-    github.context.payload = originalContext.payload
+    context.eventName = originalContext.eventName
+    context.payload = originalContext.payload
   })
 
   afterAll(() => {
     // Restore @actions/github context
-    github.context.ref = originalContext.ref
-    github.context.sha = originalContext.sha
-    github.context.eventName = originalContext.eventName
-    github.context.actor = originalContext.actor
+    context.ref = originalContext.ref
+    context.sha = originalContext.sha
+    context.eventName = originalContext.eventName
+    context.actor = originalContext.actor
 
     // Restore
     jest.restoreAllMocks()
@@ -73,7 +73,7 @@ describe('queries', () => {
       }
     })
       .get(
-        `/repos/${github.context.repo.owner}/${github.context.repo.repo}/collaborators/${github.context.actor}/permission`
+        `/repos/${context.repo.owner}/${context.repo.repo}/collaborators/${context.actor}/permission`
       )
       .reply(200, {
         permission: 'admin',
@@ -115,10 +115,11 @@ describe('queries', () => {
         role_name: 'admin'
       })
 
-    const octokit = github.getOctokit('justafaketoken')
+    const octokit = getOctokit('justafaketoken')
 
-    const permission = await permitted(octokit, github.context, 'write')
+    const permission = await permitted(octokit, context, 'write')
     expect(permission).toBe(true)
+    expect(scope.isDone()).toBe(true)
   })
 
   test('actor matches required access', async () => {
@@ -128,7 +129,7 @@ describe('queries', () => {
       }
     })
       .get(
-        `/repos/${github.context.repo.owner}/${github.context.repo.repo}/collaborators/${github.context.actor}/permission`
+        `/repos/${context.repo.owner}/${context.repo.repo}/collaborators/${context.actor}/permission`
       )
       .reply(200, {
         permission: 'write',
@@ -170,10 +171,11 @@ describe('queries', () => {
         role_name: 'write'
       })
 
-    const octokit = github.getOctokit('justafaketoken')
+    const octokit = getOctokit('justafaketoken')
 
-    const permission = await permitted(octokit, github.context, 'write')
+    const permission = await permitted(octokit, context, 'write')
     expect(permission).toBe(true)
+    expect(scope.isDone()).toBe(true)
   })
 
   test('actor is below required access', async () => {
@@ -183,7 +185,7 @@ describe('queries', () => {
       }
     })
       .get(
-        `/repos/${github.context.repo.owner}/${github.context.repo.repo}/collaborators/${github.context.actor}/permission`
+        `/repos/${context.repo.owner}/${context.repo.repo}/collaborators/${context.actor}/permission`
       )
       .reply(200, {
         permission: 'read',
@@ -225,10 +227,11 @@ describe('queries', () => {
         role_name: 'read'
       })
 
-    const octokit = github.getOctokit('justafaketoken')
+    const octokit = getOctokit('justafaketoken')
 
-    const permission = await permitted(octokit, github.context, 'write')
+    const permission = await permitted(octokit, context, 'write')
     expect(permission).toBe(false)
+    expect(scope.isDone()).toBe(true)
   })
 
   test('actor does not have push permissions', async () => {
@@ -238,7 +241,7 @@ describe('queries', () => {
       }
     })
       .get(
-        `/repos/${github.context.repo.owner}/${github.context.repo.repo}/collaborators/${github.context.actor}/permission`
+        `/repos/${context.repo.owner}/${context.repo.repo}/collaborators/${context.actor}/permission`
       )
       .reply(403, {
         message: 'Must have push access to view collaborator permission.',
@@ -246,9 +249,10 @@ describe('queries', () => {
           'https://docs.github.com/rest/reference/repos#get-repository-permissions-for-a-user'
       })
 
-    const octokit = github.getOctokit('justafaketoken')
+    const octokit = getOctokit('justafaketoken')
 
-    const permission = permitted(octokit, github.context, 'write')
-    await expect(permission).rejects.toThrowError()
+    const permission = permitted(octokit, context, 'write')
+    await expect(permission).rejects.toThrow()
+    expect(scope.isDone()).toBe(true)
   })
 })

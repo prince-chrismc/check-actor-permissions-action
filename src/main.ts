@@ -16,7 +16,7 @@ async function run(): Promise<void> {
       core.setOutput('permitted', 'true')
     } else {
       core.setFailed(
-        `🚨 Insuffient Permissions! ${username} does not have ${requiredPermission} permissions`
+        `🚨 Insufficient Permissions! ${username} does not have ${requiredPermission} permissions`
       )
       core.setOutput('permitted', 'false')
     }
