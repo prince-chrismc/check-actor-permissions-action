@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2022", /* Specify ECMAScript target version: see https://github.com/microsoft/TypeScript/wiki/Node-Target-Mapping */
-    "lib": ["ES2023"]  /* Specify TypeScript library implementation: see https://github.com/microsoft/TypeScript/wiki/Node-Target-Mapping */
+    "lib": ["ES2023"],  /* Specify TypeScript library implementation: see https://github.com/microsoft/TypeScript/wiki/Node-Target-Mapping */
     "module": "NodeNext", /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
     "outDir": "./lib", /* Redirect output structure to the directory. */
     "rootDir": "./src", /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
