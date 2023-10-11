@@ -1,4 +1,4 @@
-@actions/core
+@actions/core 
 MIT
 The MIT License (MIT)
 
