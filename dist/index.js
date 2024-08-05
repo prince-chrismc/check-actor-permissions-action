@@ -88,7 +88,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.permitted = void 0;
+exports.permitted = permitted;
 const core = __importStar(__nccwpck_require__(2186));
 // Permission levels - higher in the array have higher access to the repo.
 const perms = ['none', 'read', 'write', 'admin'];
@@ -106,7 +106,6 @@ async function permitted(octokit, context, requiredPermission) {
     // exit successfully.
     return yourPermIdx >= requiredPermIdx;
 }
-exports.permitted = permitted;
 
 
 /***/ }),
