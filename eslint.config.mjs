@@ -40,7 +40,7 @@ export default [ {
         },
     },
   },
-  ...compat,
+  compat,
   github.getFlatConfigs().recommended,
   ...github.getFlatConfigs().typescript, {
     rules: {
