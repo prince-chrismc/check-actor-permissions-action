@@ -66,7 +66,7 @@ export default [
             allowExpressions: true,
         }],
 
-        "func-call-spacing": ["error", "never"],
+        //"@stylistic/func-call-spacing": ["error", "never"],
         "@typescript-eslint/no-array-constructor": "error",
         "@typescript-eslint/no-empty-interface": "error",
         "@typescript-eslint/no-explicit-any": "error",
@@ -87,8 +87,8 @@ export default [
         "@typescript-eslint/promise-function-async": "error",
         "@typescript-eslint/require-array-sort-compare": "error",
         "@typescript-eslint/restrict-plus-operands": "error",
-        "semi": ["error", "never"],
-        "@typescript-eslint/type-annotation-spacing": "error",
+        //"@stylistic/semi": ["error", "never"],
+        //"@stylistic/type-annotation-spacing": "error",
         "@typescript-eslint/unbound-method": "error",
     },
 }];
