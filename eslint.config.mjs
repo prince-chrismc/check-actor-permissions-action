@@ -41,11 +41,6 @@ export default [
             project: "./tsconfig.json",
         },
     },
-    settings: {
-        'import/resolver': {
-            typescript: {},
-      },
-    },
   }, {
     rules: {
         "i18n-text/no-en": "off",
