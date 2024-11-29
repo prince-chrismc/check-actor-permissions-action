@@ -1,21 +1,9 @@
-import typescriptEslint from "@typescript-eslint/eslint-plugin";
-import globals from "globals";
-import tsParser from "@typescript-eslint/parser";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import js from "@eslint/js";
-import { FlatCompat } from "@eslint/eslintrc";
 import github from 'eslint-plugin-github'
+import globals from "globals";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-    baseDirectory: __dirname,
-    recommendedConfig: js.configs.recommended,
-    allConfig: js.configs.all
-});
-
-export default [ {
+export default [ 
+  github.getFlatConfigs().recommended,
+  ...github.getFlatConfigs().typescript, {
     files: [
         "src/**/*.ts",
         "__tests__/**/*.ts",
@@ -30,19 +18,13 @@ export default [ {
         globals: {
             ...globals.node,
         },
-
-        parser: tsParser,
         ecmaVersion: 2023,
         sourceType: "module",
-
         parserOptions: {
             project: "./tsconfig.json",
         },
     },
-  },
-  compat,
-  github.getFlatConfigs().recommended,
-  ...github.getFlatConfigs().typescript, {
+  }, {
     rules: {
         "i18n-text/no-en": "off",
         "import/no-namespace": "off",
