@@ -28,17 +28,25 @@ export default [
         "**/node_modules/",
         "**/jest.config.js",
     ],
-    parserOptions: {
-      sourceType: 'module',
-      project: './tsconfig.json',
+    languageOptions: {
+        globals: {
+            ...globals.node,
+        },
+
+        parser: tsParser,
+        ecmaVersion: 2023,
+        sourceType: "module",
+
+        parserOptions: {
+            project: "./tsconfig.json",
+        },
     },
     settings: {
-      'import/resolver': {
-        typescript: {},
+        'import/resolver': {
+            typescript: {},
       },
     },
   }, {
-
     rules: {
         "i18n-text/no-en": "off",
         "import/no-namespace": "off",
