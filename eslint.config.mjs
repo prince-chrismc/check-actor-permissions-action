@@ -31,10 +31,6 @@ export default [
         "**/jest.config.js",
     ],
 }, {
-    plugins: {
-        "@typescript-eslint": typescriptEslint,
-    },
-
     languageOptions: {
         globals: {
             ...globals.node,
