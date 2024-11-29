@@ -1,9 +1,7 @@
 import github from 'eslint-plugin-github'
 import globals from "globals";
 
-export default [ 
-  github.getFlatConfigs().recommended,
-  ...github.getFlatConfigs().typescript, {
+export default [ {
     files: [
         "src/**/*.ts",
         "__tests__/**/*.ts",
@@ -26,7 +24,9 @@ export default [
             project: "./tsconfig.json",
         },
     },
-  }, {
+  },
+  github.getFlatConfigs().recommended,
+  ...github.getFlatConfigs().typescript, {
     rules: {
         "i18n-text/no-en": "off",
         "import/no-namespace": "off",
