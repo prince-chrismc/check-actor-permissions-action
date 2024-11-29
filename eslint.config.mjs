@@ -16,9 +16,7 @@ const compat = new FlatCompat({
 });
 
 export default [
-  github.getFlatConfigs().browser,
   github.getFlatConfigs().recommended,
-  github.getFlatConfigs().react,
   ...github.getFlatConfigs().typescript, {
     files: [
         "src/**/*.ts",
