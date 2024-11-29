@@ -47,7 +47,6 @@ export default [
 
     rules: {
         "i18n-text/no-en": "off",
-        "eslint-comments/no-use": "error",
         "import/no-namespace": "off",
         "no-unused-vars": "error",
         "@typescript-eslint/no-unused-vars": "error",
