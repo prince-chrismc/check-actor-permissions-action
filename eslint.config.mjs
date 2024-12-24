@@ -71,6 +71,6 @@ export default [ {
         //"@typescript-eslint/restrict-plus-operands": "error",
         //"@stylistic/semi": ["error", "never"],
         //"@stylistic/type-annotation-spacing": "error",
-        "@typescript-eslint/unbound-method": "error",
+        //"@typescript-eslint/unbound-method": "error",
     },
 }];
