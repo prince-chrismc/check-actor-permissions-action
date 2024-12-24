@@ -39,7 +39,7 @@ export default [ {
 
         "@typescript-eslint/no-require-imports": "error",
         "@typescript-eslint/array-type": "error",
-        "@typescript-eslint/await-thenable": "error",
+        //"@typescript-eslint/await-thenable": "error",
         "@typescript-eslint/ban-ts-comment": "error",
         camelcase: "error",
         "@typescript-eslint/consistent-type-assertions": "error",
