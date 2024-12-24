@@ -67,7 +67,7 @@ export default [ {
         //"@typescript-eslint/prefer-includes": "error",
         //"@typescript-eslint/prefer-string-starts-ends-with": "error",
         //"@typescript-eslint/promise-function-async": "error",
-        "@typescript-eslint/require-array-sort-compare": "error",
+        //"@typescript-eslint/require-array-sort-compare": "error",
         "@typescript-eslint/restrict-plus-operands": "error",
         //"@stylistic/semi": ["error", "never"],
         //"@stylistic/type-annotation-spacing": "error",
