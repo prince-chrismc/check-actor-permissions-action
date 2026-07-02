@@ -25,6 +25,7 @@
     "node": ">=24.0.0"
   },
   "scripts": {
+    "bundle": "npm run format:write && npm run package",
     "format:write": "npx prettier --write .",
     "format:check": "npx prettier --check .",
     "lint": "eslint --fix src/**/*.ts && eslint --fix __tests__/**/*.ts",

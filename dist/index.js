@@ -33287,9 +33287,12 @@ async function run() {
         }
     }
     catch (error) {
+        setOutput('permitted', 'false');
         if (error instanceof Error)
             setFailed(error);
     }
 }
 run();
+
+export { run };
 //# sourceMappingURL=index.js.map
