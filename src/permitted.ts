@@ -1,13 +1,15 @@
 import * as core from '@actions/core'
-import {Context} from '@actions/github/lib/context'
-import {GitHub} from '@actions/github/lib/utils'
+import { context as githubContext, getOctokit } from '@actions/github'
+
+type ContextType = typeof githubContext
+type GitHubInstance = ReturnType<typeof getOctokit>
 
 // Permission levels - higher in the array have higher access to the repo.
 const perms: readonly string[] = ['none', 'read', 'write', 'admin']
 
 export async function permitted(
-  octokit: InstanceType<typeof GitHub>,
-  context: Context,
+  octokit: GitHubInstance,
+  context: ContextType,
   requiredPermission: string
 ): Promise<boolean> {
   const response = await octokit.rest.repos.getCollaboratorPermissionLevel({

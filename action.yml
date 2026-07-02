@@ -1,12 +1,14 @@
 name: Check Actor Permissions
 description: Check if an actor has a specific access to the repository
-author: "prince-chrismc"
+author: 'prince-chrismc'
 branding:
-  icon: "check"
-  color: "green"
+  icon: 'check'
+  color: 'green'
 outputs:
   permitted:
-    description: "Set 'true' or 'false' depending on actor permission meeting the requirement"
+    description:
+      "Set 'true' or 'false' depending on actor permission meeting the
+      requirement"
 inputs:
   github_token:
     description: A GitHub token.
@@ -16,5 +18,5 @@ inputs:
     description: The minimum permission level required
     required: true
 runs:
-  using: "node20"
-  main: "dist/index.js"
+  using: 'node24'
+  main: 'dist/index.js'

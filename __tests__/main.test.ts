@@ -1,8 +1,6 @@
-import * as core from '@actions/core'
-import {context, getOctokit} from '@actions/github'
+import { context, getOctokit } from '@actions/github'
 import nock from 'nock'
 
-import {permitted} from '../src/permitted'
 import {
   expect,
   test,
@@ -13,28 +11,39 @@ import {
   jest
 } from '@jest/globals'
 
-// Inputs for mock @actions/core
-let inputs = {} as any
+// 1. Set up a mutable tracking engine for your fake input properties
+let inputs: Record<string, string> = {}
+
+// 2. Set up global tracking mocks for verification asserts
+const mockSetFailed = jest.fn()
+const mockInfo = jest.fn()
+const mockError = jest.fn()
+const mockWarning = jest.fn()
+const mockDebug = jest.fn()
+const mockStartGroup = jest.fn()
+const mockEndGroup = jest.fn()
+
+// 3. Intercept the ESM resolution path natively BEFORE imports execute
+jest.unstable_mockModule('@actions/core', () => ({
+  // Dynamically reads from your local 'inputs' dictionary at runtime
+  getInput: jest.fn((name: string) => inputs[name] || ''),
+  setFailed: mockSetFailed,
+  info: mockInfo,
+  error: mockError,
+  warning: mockWarning,
+  debug: mockDebug,
+  startGroup: mockStartGroup,
+  endGroup: mockEndGroup
+}))
+
+// 4. Dynamically import your local test targets AFTER registering the mock interceptors
+const { permitted } = await import('../src/permitted')
 
 // Shallow clone original @actions/github context
-const originalContext = {...context}
+const originalContext = { ...context }
 
 describe('queries', () => {
   beforeAll(() => {
-    // Mock getInput
-    jest.spyOn(core, 'getInput').mockImplementation((name: string) => {
-      return inputs[name]
-    })
-
-    // Mock error/warning/info/debug
-    jest.spyOn(core, 'error').mockImplementation(jest.fn())
-    jest.spyOn(core, 'warning').mockImplementation(jest.fn())
-    jest.spyOn(core, 'info').mockImplementation(jest.fn())
-    jest.spyOn(core, 'debug').mockImplementation(jest.fn())
-    jest.spyOn(core, 'startGroup').mockImplementation(jest.fn())
-    jest.spyOn(core, 'endGroup').mockImplementation(jest.fn())
-    jest.spyOn(core, 'setFailed').mockImplementation(jest.fn())
-
     // Mock github context
     jest.spyOn(context, 'repo', 'get').mockImplementation(() => {
       return {

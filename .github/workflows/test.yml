@@ -10,32 +10,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/cache@v5
+      - uses: actions/setup-node@v6
         with:
-          path: node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-      - run: npm i
-      - run: npm run all
+          node-version-file: package.json
+          cache: npm
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run lint
+      - run: npm run test
+      - uses: codecov/codecov-action@v7
+        with:
+          directory: coverage/
 
   e2e: # make sure the action works on a clean machine without building
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
       - uses: ./
+        id: test-action
         with:
           permission: none
-
-  coverage:
-    needs: ci
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: actions/cache@v5
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-      - run: npm i
-      - run: npm run test -- --coverage
-      - uses: codecov/codecov-action@v5
-        with:
-          directory: coverage/
+      - run: echo "${{ steps.test-action.outputs.permitted }}"
