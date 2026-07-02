@@ -1,5 +1,5 @@
 import * as core from '@actions/core'
-import {context as githubContext, getOctokit} from '@actions/github'
+import { context as githubContext, getOctokit } from '@actions/github'
 
 type ContextType = typeof githubContext
 type GitHubInstance = ReturnType<typeof getOctokit>

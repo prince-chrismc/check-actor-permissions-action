@@ -1,4 +1,4 @@
-import {context, getOctokit} from '@actions/github'
+import { context, getOctokit } from '@actions/github'
 import nock from 'nock'
 
 import {
@@ -37,10 +37,10 @@ jest.unstable_mockModule('@actions/core', () => ({
 }))
 
 // 4. Dynamically import your local test targets AFTER registering the mock interceptors
-const {permitted} = await import('../src/permitted')
+const { permitted } = await import('../src/permitted')
 
 // Shallow clone original @actions/github context
-const originalContext = {...context}
+const originalContext = { ...context }
 
 describe('queries', () => {
   beforeAll(() => {

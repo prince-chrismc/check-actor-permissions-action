@@ -1,32 +1,40 @@
+// See: https://jestjs.io/docs/configuration
+
+/** @type {import('ts-jest').JestConfigWithTsJest} **/
 export default {
   clearMocks: true,
-  testMatch: ['**/*.test.ts'],
-  preset: 'ts-jest',
-  testEnvironment: 'node',
-  
-  // 1. Treats test source files as native ES Modules
+  collectCoverage: true,
+  collectCoverageFrom: ['./src/**'],
+  coverageDirectory: './coverage',
+  coveragePathIgnorePatterns: ['/node_modules/', '/dist/'],
+  coverageReporters: ['json-summary', 'text', 'lcov'],
+  // Uncomment the below lines if you would like to enforce a coverage threshold
+  // for your action. This will fail the build if the coverage is below the
+  // specified thresholds.
+  // coverageThreshold: {
+  //   global: {
+  //     branches: 100,
+  //     functions: 100,
+  //     lines: 100,
+  //     statements: 100
+  //   }
+  // },
   extensionsToTreatAsEsm: ['.ts'],
-
-  // 2. FORCE Jest to match external libraries and strip local compiler extension paths
-  moduleNameMapper: {
-    // Map individual CommonJS vendor packages directly to their primary main files
-    '^@actions/core$': '<rootDir>/node_modules/@actions/core/lib/core.js',
-    '^@actions/github$': '<rootDir>/node_modules/@actions/github/lib/github.js',
-    
-    // Smoothly handles relative extension-less routing for your compiled local modules
-    '^(\\.{1,2}/.*)\\.js$': '$1',
-  },
-
+  moduleFileExtensions: ['ts', 'js'],
+  preset: 'ts-jest',
+  reporters: ['default'],
+  resolver: 'ts-jest-resolver',
+  testEnvironment: 'node',
+  testMatch: ['**/*.test.ts'],
+  testPathIgnorePatterns: ['/dist/', '/node_modules/'],
   transform: {
-    // 3. Configure ts-jest compilation targets
-    '^.+\\.tsx?$': [
+    '^.+\\.ts$': [
       'ts-jest',
-      { 
-        useESM: true,
-        tsconfig: './__tests__/tsconfig.json'
+      {
+        tsconfig: 'tsconfig.json',
+        useESM: true
       }
-    ],
+    ]
   },
-  
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  verbose: true
 }

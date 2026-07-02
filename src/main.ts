@@ -1,14 +1,14 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
 
-import {permitted} from './permitted'
+import { permitted } from './permitted.js'
 
-async function run(): Promise<void> {
+export async function run(): Promise<void> {
   try {
     const githubToken = core.getInput('github_token')
     const octokit = github.getOctokit(githubToken)
     const username: Readonly<string> = github.context.actor
-    const requiredPermission = core.getInput('permission', {required: true}) // Permission level passed in through args
+    const requiredPermission = core.getInput('permission', { required: true }) // Permission level passed in through args
 
     const allowed = await permitted(octokit, github.context, requiredPermission)
     if (allowed) {
@@ -21,6 +21,7 @@ async function run(): Promise<void> {
       core.setOutput('permitted', 'false')
     }
   } catch (error) {
+    core.setOutput('permitted', 'false')
     if (error instanceof Error) core.setFailed(error)
   }
 }
