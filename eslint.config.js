@@ -7,9 +7,7 @@ import jestPlugin from "eslint-plugin-jest";
 import globals from "globals";
 
 export default tseslint.config(
-  // ==========================================
-  // BLOCK 1: Global Ignores
-  // ==========================================
+  // Global Ignores
   {
     ignores: [
       "dist/",
@@ -19,15 +17,11 @@ export default tseslint.config(
     ]
   },
 
-  // ==========================================
-  // BLOCK 2: Base Configurations (TypeScript & GitHub)
-  // ==========================================
+  // Base Configurations (TypeScript & GitHub)
   ...tseslint.configs.recommended,
   githubPlugin.getFlatConfigs().recommended,
 
-  // ==========================================
-  // BLOCK 3: Source Application Code Only
-  // ==========================================
+  // Source Application Code Only
   {
     files: ["src/**/*.ts", "src/**/*.tsx", "index.ts", "main.ts"], 
     plugins: {
@@ -47,7 +41,7 @@ export default tseslint.config(
     },
     rules: {
       "i18n-text/no-en": "off",
-      "import/no-namespace": "off", // Already turned off in source if needed
+      "import/no-namespace": "off",
       "no-unused-vars": "error",
       "eslint-comments/no-use": "error", 
       
@@ -89,14 +83,10 @@ export default tseslint.config(
     },
   },
 
-  // ==========================================
-  // BLOCK 4: Isolated Testing Configuration Block
-  // ==========================================
+  // Testing Configuration
   {
     files: [
-      "**/*.test.ts", 
-      "**/*.spec.ts", 
-      "**/__tests__/**/*.ts"
+      "**/__tests__/**/*.test.ts"
     ],
     plugins: {
       jest: jestPlugin,
