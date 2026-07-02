@@ -3,6 +3,13 @@
   "compilerOptions": {
     "noEmit": true
   },
-  "include": ["../__tests__/**/*.ts", "../src/**/*.ts"],
-  "exclude": ["../dist", "../node_modules", "../coverage", "*.json"]
+  "include": [
+    "**/*.ts",          // Targets all TypeScript files within the __tests__ folder
+    "../src/**/*.ts"    // Targets your application source files correctly
+  ],
+  "exclude": [
+    "../dist", 
+    "../node_modules", 
+    "../coverage"
+  ]
 }
