@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/prince-chrismc/check-actor-permissions-action#readme",
   "engines": {
-    "node": ">=20"
+    "node": ">=24.0.0"
   },
   "dependencies": {
     "@actions/core": "^3.0.1",
@@ -48,7 +48,7 @@
     "eslint-plugin-jest": "^29.15.4",
     "jest": "^30.4.2",
     "js-yaml": "^5.2.1",
-    "nock": "^15.0.0-beta.1",
+    "nock": "^15.0.0-beta.12",
     "prettier": "3.9.4",
     "ts-jest": "^29.4.11",
     "typescript": "^6.0.3"
