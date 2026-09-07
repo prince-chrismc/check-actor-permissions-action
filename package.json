@@ -40,7 +40,7 @@
     "@actions/github": "^9.1.1"
   },
   "devDependencies": {
-    "@eslint/compat": "^2.1.0",
+    "@eslint/compat": "^2.1.1",
     "@eslint/eslintrc": "^3.3.7",
     "@eslint/js": "^10.0.1",
     "@github/local-action": "^7.0.1",
