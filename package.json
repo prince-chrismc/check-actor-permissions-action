@@ -44,29 +44,35 @@
     "@eslint/eslintrc": "^3.3.7",
     "@eslint/js": "^10.0.1",
     "@github/local-action": "^7.0.1",
-    "@jest/globals": "^30.5.1",
+    "@jest/globals": "^30.5.2",
     "@rollup/plugin-commonjs": "^29.0.3",
     "@rollup/plugin-node-resolve": "^16.0.3",
-    "@rollup/plugin-typescript": "^12.3.0",
+    "@rollup/plugin-typescript": "^12.3.1",
     "@stylistic/eslint-plugin": "^5.10.0",
     "@types/jest": "^30.0.0",
-    "@types/node": "^26.6.1",
-    "eslint": "^10.10.0",
+    "@types/node": "^26.6.6",
+    "eslint": "^10.15.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-github": "^6.1.2",
-    "eslint-plugin-jest": "^29.16.6",
-    "eslint-plugin-prettier": "^5.5.6",
+    "eslint-plugin-jest": "^29.17.1",
+    "eslint-plugin-prettier": "^5.5.7",
     "jest": "^30.5.2",
-    "nock": "^15.0.0-beta.14",
-    "prettier": "^3.9.6",
+    "nock": "^15.0.6",
+    "prettier": "^3.10.1",
     "prettier-plugin-ignored": "^1.0.0",
-    "rollup": "^4.62.5",
-    "ts-jest": "^29.4.12",
+    "rollup": "^4.68.8",
+    "ts-jest": "^29.4.15",
     "ts-jest-resolver": "^2.0.1",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.70.0"
+    "typescript-eslint": "^8.73.0"
   },
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "*"
+  },
+  "allowScripts": {
+    "@parcel/watcher@2.6.0": true,
+    "esbuild@0.28.1": true,
+    "fsevents@2.3.3": true,
+    "unrs-resolver@1.12.2": true
   }
 }
